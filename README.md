@@ -17,7 +17,7 @@ Mac sürümü: [easafb/ytmusic-mac](https://github.com/easafb/ytmusic-mac)
 - Ctrl + / Ctrl − ile yakınlaştırma, F5 ile yenileme
 
 ## İndir
-[Son sürümü indir](https://github.com/easafb/ytmusic-windows/releases/latest) → `YT-Music-Windows.zip` içindeki
+[Sürümler sayfasından indir](https://github.com/easafb/ytmusic-windows/releases) → `YT-Music-Windows.zip` içindeki
 `YTMusic.exe`'yi istediğin bir klasöre koyup çalıştır. Kurulum gerekmez.
 
 Uygulama imzalı olmadığı için Windows ilk açılışta **"Windows kişisel bilgisayarınızı korudu"** uyarısı verebilir:
