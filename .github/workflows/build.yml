@@ -1,0 +1,44 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Derle
+        run: cargo build --release
+
+      - name: Paketle
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force dist | Out-Null
+          Copy-Item target/release/YTMusic.exe dist/
+          Compress-Archive -Path dist/YTMusic.exe -DestinationPath dist/YT-Music-Windows.zip -Force
+          Get-ChildItem dist | Format-Table Name, Length
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: YTMusic-windows
+          path: dist/YTMusic.exe
+
+      - name: Release oluştur
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.ref_name }}" dist/YT-Music-Windows.zip --clobber --repo "${{ github.repository }}"

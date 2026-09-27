@@ -1,0 +1,32 @@
+[package]
+name = "ytmusic"
+version = "1.0.0"
+edition = "2021"
+description = "Windows için hafif YouTube Music uygulaması"
+license = "MIT"
+
+[[bin]]
+name = "YTMusic"
+path = "src/main.rs"
+
+[dependencies]
+wry = "0.57"
+tao = "0.37"
+tray-icon = "0.25"
+windows-sys = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_System_Threading",
+    "Win32_UI_Shell",
+    "Win32_UI_WindowsAndMessaging",
+] }
+
+[build-dependencies]
+winresource = "0.1"
+
+# Küçük ve hızlı bir .exe için
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
